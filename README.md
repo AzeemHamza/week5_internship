@@ -1,25 +1,31 @@
 # Personal Portfolio – Hamza Azeem
 
-A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
+A modern, feature-rich portfolio website built with React, Vite, and Tailwind CSS.
 
 ## Features
-- Home page with profile and skills
-- Projects page with search, category, and technology filters
-- Contact page with links and info
-- Dark theme, fully responsive
-- Loading, error, and empty states
-- Mock API integration (easily switchable to a real backend)
-- SEO optimised (Open Graph, meta tags, semantic HTML)
-- Accessibility improvements (ARIA labels, keyboard navigation, proper headings)
+- **Dark/Light Mode** with system preference detection and manual toggle
+- **Project Detail Modal** with full description, tech stack, and links
+- **Working Contact Form** (Formspree integration – real emails)
+- **Testimonials Section** showcasing recommendations
+- **Animated Stats Counter** for key achievements
+- **Scroll Progress Bar** and scroll-to-top button
+- **Smooth page transitions and scroll reveal animations** (Framer Motion)
+- **Fully Responsive** across mobile, tablet, and desktop
+- **Accessible**: Skip to content, ARIA labels, semantic HTML, proper heading structure
+- **SEO Optimized**: Open Graph tags, meta descriptions, favicon
+- **Loading skeletons, error and empty states** for all dynamic sections
+- **Downloadable Resume** button
 
 ## Technologies
 - React 18 (Hooks, Context)
 - React Router v6
-- Tailwind CSS (custom dark palette)
-- Vite
+- Tailwind CSS (custom dark/light theme)
+- Framer Motion
 - React Icons
 - React Helmet Async (SEO)
-- Vercel / Netlify (deployment)
+- Formspree (contact form)
+- Vite (build tool)
+- Vercel (deployment)
 
 ## Installation
 ```bash

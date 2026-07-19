@@ -1,49 +1,41 @@
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import ProjectModal from './ProjectModal';
 
 export default function ProjectCard({ project }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
-    <div className="group bg-dark-800 rounded-2xl overflow-hidden border border-dark-700 hover:border-dark-600 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-indigo-500/10">
-      <div className="relative h-48 overflow-hidden">
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.4 }}
+        whileHover={{ scale: 1.02 }}
+        onClick={() => setModalOpen(true)}
+        className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-colors cursor-pointer"
+      >
         <img
-          src={project.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format'}
+          src={project.image}
           alt={project.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          className="w-full h-48 object-cover"
         />
-        {project.category && (
-          <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-xs text-gray-200 px-3 py-1 rounded-full">
-            {project.category}
-          </span>
-        )}
-      </div>
-
-      <div className="p-5 space-y-4">
-        <h3 className="text-xl font-semibold text-white">{project.name}</h3>
-        <p className="text-gray-400 text-sm line-clamp-3">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2">
-          {project.technologies?.map((tech) => (
-            <span key={tech} className="px-3 py-1 text-xs rounded-full bg-dark-700 text-indigo-300 border border-dark-600">
-              {tech}
-            </span>
-          ))}
+        <div className="p-5">
+          <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-2">{project.name}</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <span key={tech} className="px-2 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300">
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
+      </motion.div>
 
-        <div className="flex items-center gap-4 pt-2">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition">
-              <FiGithub /> Code
-            </a>
-          )}
-          {project.liveDemo && (
-            <a href={project.liveDemo} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-indigo-400 hover:text-indigo-300 transition">
-              <FiExternalLink /> Live Demo
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
+      {modalOpen && <ProjectModal project={project} onClose={() => setModalOpen(false)} />}
+    </>
   );
 }

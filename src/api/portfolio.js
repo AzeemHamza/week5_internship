@@ -8,7 +8,6 @@ import {
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
-// Simulate network delay
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 async function request(endpoint, options = {}) {
@@ -19,14 +18,13 @@ async function request(endpoint, options = {}) {
     if (endpoint.startsWith('/skills')) return mockSkills;
 
     if (endpoint.startsWith('/projects')) {
-      // Parse query parameters from the endpoint string
       const fakeBase = 'http://dummy';
       const url = new URL(endpoint, fakeBase);
       const searchQuery = url.searchParams.get('search')?.toLowerCase();
       const categoryFilter = url.searchParams.get('category');
       const techFilter = url.searchParams.get('tech')?.toLowerCase();
 
-      let filtered = [...mockProjects]; // copy
+      let filtered = [...mockProjects];
 
       if (searchQuery) {
         filtered = filtered.filter(

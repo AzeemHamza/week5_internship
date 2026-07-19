@@ -1,71 +1,42 @@
-import { Link, NavLink } from 'react-router-dom';
-import { FiCode, FiMenu, FiX } from 'react-icons/fi';
-import { useState } from 'react';
-
-const links = [
-  { to: '/', label: 'Home' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/contact', label: 'Contact' },
-];
+import { NavLink } from 'react-router-dom';
+import { useTheme } from '../context/ThemeProvider';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const { darkMode, toggleTheme } = useTheme();
+
+  const linkClass = ({ isActive }) =>
+    `px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
+      isActive
+        ? 'bg-indigo-600 text-white'
+        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-dark-700'
+    }`;
 
   return (
-    <nav className="sticky top-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-xl font-bold text-white">
-          <FiCode className="text-indigo-400" />
-          <span>Portfolio</span>
-        </Link>
-
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              className={({ isActive }) =>
-                `text-sm font-medium transition ${
-                  isActive ? 'text-indigo-400' : 'text-gray-400 hover:text-white'
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+    <header className="sticky top-0 z-40 bg-white/80 dark:bg-dark-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-dark-700">
+      <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between" aria-label="Main navigation">
+        <NavLink to="/" className="text-xl font-bold text-gray-900 dark:text-white">
+          HA
+        </NavLink>
+        <div className="flex items-center gap-2">
+          <NavLink to="/" end className={linkClass}>
+            Home
+          </NavLink>
+          <NavLink to="/projects" className={linkClass}>
+            Projects
+          </NavLink>
+          <NavLink to="/contact" className={linkClass}>
+            Contact
+          </NavLink>
+          <button
+            onClick={toggleTheme}
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="ml-2 p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          >
+            {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+          </button>
         </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-gray-400 hover:text-white transition"
-        >
-          {open ? <FiX size={24} /> : <FiMenu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-dark-800 border-t border-dark-700 px-4 pb-4 pt-2 space-y-3">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `block py-2 text-sm font-medium rounded-lg px-3 transition ${
-                  isActive ? 'bg-dark-700 text-white' : 'text-gray-400 hover:bg-dark-700 hover:text-white'
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-      )}
-    </nav>
+      </nav>
+    </header>
   );
 }

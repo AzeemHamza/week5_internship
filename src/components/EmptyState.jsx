@@ -1,10 +1,10 @@
-import { FiInbox } from 'react-icons/fi';
+import { FiFolder } from 'react-icons/fi';
 
-export default function EmptyState({ message = 'No data to display.' }) {
+export default function EmptyState({ message }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <FiInbox className="text-gray-600 w-12 h-12 mb-4" />
-      <p className="text-gray-400 text-lg">{message}</p>
+    <div className="flex flex-col items-center justify-center py-10 text-center">
+      <FiFolder className="text-gray-600 text-4xl mb-3" />
+      <p className="text-gray-500 text-lg">{message || 'No data found.'}</p>
     </div>
   );
 }
