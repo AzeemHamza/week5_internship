@@ -2,6 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import PageWrapper from '../components/PageWrapper';
 import Typewriter from '../components/Typewriter';
 import FeaturedCarousel from '../components/FeaturedCarousel';
+import AboutSection from '../components/AboutSection';
+import ServicesSection from '../components/ServicesSection';
 import useFetch from '../hooks/useFetch';
 import { fetchProfile, fetchSkills } from '../api/portfolio';
 import SkillCard from '../components/SkillCard';
@@ -54,7 +56,6 @@ export default function Home() {
               />
               <div>
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{profile.name}</h1>
-                {/* Typewriter effect replacing static title */}
                 <p className="text-lg font-medium">
                   <Typewriter
                     texts={[
@@ -82,6 +83,12 @@ export default function Home() {
             </motion.div>
           )}
         </section>
+
+        {/* About Section */}
+        <AboutSection profile={profile} />
+
+        {/* Services Section */}
+        <ServicesSection />
 
         {/* Featured Projects Carousel */}
         <FeaturedCarousel />
