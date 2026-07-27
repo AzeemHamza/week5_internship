@@ -1,9 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import PageWrapper from '../components/PageWrapper';
 import Typewriter from '../components/Typewriter';
-import FeaturedCarousel from '../components/FeaturedCarousel';
+import ParticleBackground from '../components/ParticleBackground';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
+import Timeline from '../components/Timeline';
+import FeaturedCarousel from '../components/FeaturedCarousel';
+import TechMarquee from '../components/TechMarquee';
+import Stats from '../components/Stats';
 import useFetch from '../hooks/useFetch';
 import { fetchProfile, fetchSkills } from '../api/portfolio';
 import SkillCard from '../components/SkillCard';
@@ -12,7 +16,6 @@ import Skeleton from '../components/Skeleton';
 import ErrorMessage from '../components/ErrorMessage';
 import EmptyState from '../components/EmptyState';
 import Testimonials from '../components/Testimonials';
-import Stats from '../components/Stats';
 import { FiMapPin, FiMail } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
@@ -22,16 +25,17 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-4 py-12 space-y-16">
+      <div className="max-w-6xl mx-auto px-4 py-12 space-y-24">
         <Helmet>
           <title>{profile?.name ? `${profile.name} – Portfolio` : 'Portfolio'}</title>
           <meta name="description" content={profile?.bio || 'Personal portfolio of Hamza Azeem'} />
         </Helmet>
 
-        {/* Profile Section */}
-        <section>
+        {/* Hero Section with Particle Background */}
+        <section className="relative">
+          <ParticleBackground />
           {profileLoading && (
-            <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
               <Skeleton className="w-40 h-40 rounded-full" />
               <div className="space-y-3 flex-1">
                 <Skeleton className="h-8 w-64" />
@@ -46,16 +50,16 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col md:flex-row items-center gap-8 bg-white dark:bg-dark-800/50 border border-gray-200 dark:border-dark-700 rounded-2xl p-8 shadow-sm"
+              className="relative z-10 flex flex-col md:flex-row items-center gap-8 bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl p-8 shadow-sm"
             >
               <img
                 src={profile.avatar || '/hamzapfp.jpg'}
                 alt={profile.name}
                 loading="lazy"
-                className="w-40 h-40 rounded-full object-cover border-4 border-gray-200 dark:border-dark-700 shadow-2xl"
+                className="w-40 h-40 rounded-full object-cover border-4 border-white/50 dark:border-dark-700 shadow-2xl"
               />
               <div>
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{profile.name}</h1>
+                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">{profile.name}</h1>
                 <p className="text-lg font-medium">
                   <Typewriter
                     texts={[
@@ -87,8 +91,14 @@ export default function Home() {
         {/* About Section */}
         <AboutSection profile={profile} />
 
+        {/* Timeline */}
+        <Timeline />
+
         {/* Services Section */}
         <ServicesSection />
+
+        {/* Tech Marquee */}
+        <TechMarquee />
 
         {/* Featured Projects Carousel */}
         <FeaturedCarousel />

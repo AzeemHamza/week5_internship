@@ -44,7 +44,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: t.id * 0.1 }}
-            className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-2xl p-6 flex flex-col"
+            className="bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl p-6 flex flex-col"
           >
             <div className="flex gap-1 mb-3 text-yellow-400">
               {[...Array(5)].map((_, i) => <FiStar key={i} size={14} fill="currentColor" />)}

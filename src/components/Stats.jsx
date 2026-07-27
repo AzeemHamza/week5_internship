@@ -10,10 +10,7 @@ function AnimatedCounter({ end, duration = 2 }) {
 
   useEffect(() => {
     if (!inView) return;
-    const controls = animate(count, end, {
-      duration,
-      ease: 'easeOut',
-    });
+    const controls = animate(count, end, { duration, ease: 'easeOut' });
     return () => controls.stop();
   }, [inView, end, duration, count]);
 
@@ -21,7 +18,6 @@ function AnimatedCounter({ end, duration = 2 }) {
 }
 
 export default function Stats() {
-  // Compute stats from actual project data
   const projectsCount = mockProjects.length;
   const uniqueTechs = new Set(mockProjects.flatMap((p) => p.technologies));
   const technologiesCount = uniqueTechs.size;
@@ -32,7 +28,7 @@ export default function Stats() {
   ];
 
   return (
-    <section className="py-12 bg-gray-50 dark:bg-dark-800/50 rounded-2xl my-16">
+    <section className="py-12 bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl my-16">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto px-4 text-center">
         {stats.map((s) => (
           <motion.div

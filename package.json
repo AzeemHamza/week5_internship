@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@tsparticles/react": "^4.3.2",
+    "@tsparticles/slim": "^4.3.2",
     "framer-motion": "^12.42.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
