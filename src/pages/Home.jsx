@@ -29,15 +29,15 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      {/* 3D Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero section – shorter on mobile */}
+      <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden">
         <ThreeScene />
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-12">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-8 md:py-12">
           {profileLoading && (
             <div className="flex flex-col md:flex-row gap-8 items-center">
-              <Skeleton className="w-40 h-40 rounded-full" />
+              <Skeleton className="w-32 h-32 md:w-40 md:h-40 rounded-full" />
               <div className="space-y-3 flex-1">
-                <Skeleton className="h-8 w-64" />
+                <Skeleton className="h-8 w-48 md:w-64" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-3/4" />
               </div>
@@ -49,17 +49,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col md:flex-row items-center gap-8 bg-white/20 dark:bg-dark-800/30 backdrop-blur-lg border border-white/30 dark:border-dark-700/30 rounded-2xl p-8 shadow-2xl"
+              className="flex flex-col md:flex-row items-center gap-6 md:gap-8 bg-white/20 dark:bg-dark-800/30 backdrop-blur-lg border border-white/30 dark:border-dark-700/30 rounded-2xl p-6 md:p-8 shadow-2xl"
             >
               <img
                 src={profile.avatar || '/hamzapfp.jpg'}
                 alt={profile.name}
                 loading="lazy"
-                className="w-40 h-40 rounded-full object-cover border-4 border-white/50 dark:border-dark-700 shadow-2xl"
+                className="w-28 h-28 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/50 dark:border-dark-700 shadow-2xl"
               />
-              <div>
-                <h1 className="text-4xl font-extrabold text-white dark:text-white mb-2 drop-shadow-lg">{profile.name}</h1>
-                <p className="text-lg font-medium text-indigo-200">
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-lg">{profile.name}</h1>
+                <p className="text-base md:text-lg font-medium text-indigo-200">
                   <Typewriter
                     texts={[
                       "Internship Seeker – Computer Science",
@@ -69,8 +69,8 @@ export default function Home() {
                     ]}
                   />
                 </p>
-                <p className="text-gray-200 mt-3 leading-relaxed">{profile.bio}</p>
-                <div className="flex flex-wrap gap-4 mt-4 text-sm text-gray-300">
+                <p className="text-gray-200 mt-3 leading-relaxed text-sm md:text-base">{profile.bio}</p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-sm text-gray-300">
                   {profile.location && (
                     <span className="flex items-center gap-1"><FiMapPin /> {profile.location}</span>
                   )}
@@ -87,7 +87,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Below-fold content lazily loaded */}
       <Suspense fallback={<div className="py-20"><Spinner /></div>}>
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-24">
           <Helmet>
