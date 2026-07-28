@@ -9,21 +9,26 @@ import ErrorMessage from '../components/ErrorMessage';
 import { FiMail, FiMapPin, FiPhone, FiLinkedin, FiGithub, FiDownload } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
+// Simple interactive map component (OpenStreetMap iframe)
+function ContactMap() {
+  return (
+    <div className="rounded-2xl overflow-hidden border border-white/20 dark:border-dark-700/50 shadow-sm">
+      <iframe
+        title="Location Map"
+        width="100%"
+        height="300"
+        frameBorder="0"
+        scrolling="no"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=74.25%2C31.45%2C74.40%2C31.55&amp;layer=mapnik&amp;marker=31.5204%2C74.3587"
+        style={{ border: 0 }}
+        allowFullScreen
+      />
+    </div>
+  );
+}
+
 export default function Contact() {
   const { data: contact, loading, error } = useFetch(fetchContact);
-
-  const handleDownloadResume = async () => {
-    const response = await fetch('/resume.pdf');
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Hamza_Azeem_Resume.pdf'; // name for the downloaded file
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    window.URL.revokeObjectURL(url);
-  };
 
   if (loading) return (
     <PageWrapper>
@@ -57,7 +62,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left: Contact info + social + resume */}
+          {/* Left: Contact info + social + resume + map */}
           <div className="space-y-6">
             {contact && (
               <motion.div
@@ -67,7 +72,10 @@ export default function Contact() {
                 className="space-y-4"
               >
                 {contact.email && (
-                  <div className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-2xl p-5 flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl p-5 flex items-center gap-4"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                       <FiMail aria-hidden="true" />
                     </div>
@@ -77,10 +85,13 @@ export default function Contact() {
                         {contact.email}
                       </a>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
                 {contact.phone && (
-                  <div className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-2xl p-5 flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl p-5 flex items-center gap-4"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                       <FiPhone aria-hidden="true" />
                     </div>
@@ -88,10 +99,13 @@ export default function Contact() {
                       <p className="text-sm text-gray-500">Phone</p>
                       <p className="text-gray-900 dark:text-white">{contact.phone}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
                 {contact.location && (
-                  <div className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-2xl p-5 flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white/70 dark:bg-dark-800/70 backdrop-blur-md border border-white/20 dark:border-dark-700/50 rounded-2xl p-5 flex items-center gap-4"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                       <FiMapPin aria-hidden="true" />
                     </div>
@@ -99,7 +113,7 @@ export default function Contact() {
                       <p className="text-sm text-gray-500">Location</p>
                       <p className="text-gray-900 dark:text-white">{contact.location}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </motion.div>
             )}
@@ -130,16 +144,20 @@ export default function Contact() {
               )}
             </div>
 
-            {/* Download Resume – now with forced download */}
-            <button
-              onClick={handleDownloadResume}
+            {/* Download Resume */}
+            <a
+              href="/resume.pdf"
+              download="Hamza_Azeem_Resume.pdf"
               className="inline-flex items-center gap-2 px-5 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
             >
               <FiDownload /> Download Resume
-            </button>
+            </a>
+
+            {/* Interactive Map */}
+            <ContactMap />
           </div>
 
-          {/* Right: Contact form */}
+          {/* Right: Contact form (already glassmorphism, Formspree) */}
           <div className="lg:col-span-2">
             <ContactForm />
           </div>

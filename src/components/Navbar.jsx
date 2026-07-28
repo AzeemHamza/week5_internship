@@ -12,6 +12,10 @@ export default function Navbar() {
         : 'text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-dark-700/50'
     }`;
 
+  const triggerCommandPalette = () => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-white/70 dark:bg-dark-900/70 backdrop-blur-md border-b border-white/20 dark:border-dark-700/50">
       <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between" aria-label="Main navigation">
@@ -29,6 +33,13 @@ export default function Navbar() {
           >
             {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
           </button>
+          {/* Command palette shortcut hint */}
+          <kbd
+            onClick={triggerCommandPalette}
+            className="hidden sm:inline-flex items-center px-2 py-1 ml-2 text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-700 transition"
+          >
+            ⌘K
+          </kbd>
         </div>
       </nav>
     </header>

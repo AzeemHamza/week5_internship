@@ -2,29 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth theme transitions */
 * {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 .dark ::-webkit-scrollbar-track { background: #0f172a; }
 ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
 .dark ::-webkit-scrollbar-thumb { background: #475569; }
 
-/* Focus visible */
 *:focus-visible {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
 
-/* Global gradient background */
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 .dark body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Disco mode Easter egg */
+.disco-mode {
+  animation: disco 1s infinite alternate;
+}
+@keyframes disco {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Performance optimizations for animations */
+.motion-div, [class*="framer"] {
+  will-change: transform, opacity;
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.skill-card, .project-card, .stat-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Prevent layout shift from scrollbar */
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }

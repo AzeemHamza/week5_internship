@@ -7,6 +7,8 @@ import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import SkipToContent from './components/SkipToContent';
 import FloatingCTA from './components/FloatingCTA';
+import CommandPalette from './components/CommandPalette';
+import EasterEggs from './components/EasterEggs';
 import { FiHome } from 'react-icons/fi';
 
 export default function App() {
@@ -40,6 +42,8 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <FloatingCTA />
+      <CommandPalette />
+      <EasterEggs onTriggerSnake={() => window.dispatchEvent(new CustomEvent('openSnake'))} />
     </>
   );
 }
