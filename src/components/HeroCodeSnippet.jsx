@@ -29,6 +29,23 @@ const snippets = [
 }`,
   },
   {
+    language: 'C++',
+    code: `#include <iostream>
+#include <vector>
+using namespace std;
+
+int binarySearch(vector<int>& arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}`,
+  },
+  {
     language: 'React',
     code: `const ProjectCard = ({ project, onOpen }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -46,12 +63,55 @@ const snippets = [
     );
 };`,
   },
+  {
+    language: 'Node.js',
+    code: `const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.get('/api/profile', (req, res) => {
+    res.json({
+        name: 'Hamza Azeem',
+        title: 'Backend Engineer',
+        skills: ['Node.js', 'Express', 'MongoDB']
+    });
+});
+
+app.listen(PORT, () => console.log(\`Server running on port \${PORT}\`));`,
+  },
+  {
+    language: 'Docker',
+    code: `# CI/CD pipeline with Azure Kubernetes
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]`,
+  },
+  {
+    language: 'SQL',
+    code: `-- Survey dashboard data aggregation
+SELECT
+    segment,
+    COUNT(*) AS responses,
+    AVG(satisfaction) AS avg_satisfaction,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY satisfaction) AS median_satisfaction
+FROM survey_results
+GROUP BY segment
+ORDER BY avg_satisfaction DESC;`,
+  },
 ];
 
 const languageColors = {
   Python: '#3572A5',
   Java: '#b07219',
+  'C++': '#f34b7d',
   React: '#61dafb',
+  'Node.js': '#339933',
+  Docker: '#2496ED',
+  SQL: '#e38c00',
 };
 
 export default function HeroCodeSnippet() {

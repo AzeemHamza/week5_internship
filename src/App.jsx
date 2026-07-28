@@ -4,11 +4,14 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import GuestBook from './pages/GuestBook';
 import ScrollToTop from './components/ScrollToTop';
 import SkipToContent from './components/SkipToContent';
 import FloatingCTA from './components/FloatingCTA';
 import CommandPalette from './components/CommandPalette';
 import EasterEggs from './components/EasterEggs';
+import CustomCursor from './components/CustomCursor';
+import AudioVisualizer from './components/AudioVisualizer';
 import { FiHome } from 'react-icons/fi';
 
 export default function App() {
@@ -16,6 +19,7 @@ export default function App() {
 
   return (
     <>
+      <CustomCursor />
       <SkipToContent />
       <ScrollToTop />
       <AnimatePresence mode="wait">
@@ -24,6 +28,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/guestbook" element={<GuestBook />} />
             <Route path="*" element={
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -42,6 +47,7 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <FloatingCTA />
+      <AudioVisualizer />
       <CommandPalette />
       <EasterEggs onTriggerSnake={() => window.dispatchEvent(new CustomEvent('openSnake'))} />
     </>

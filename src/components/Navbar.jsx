@@ -25,6 +25,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <NavLink to="/" end className={linkClass}>Home</NavLink>
           <NavLink to="/projects" className={linkClass}>Projects</NavLink>
+          <NavLink to="/guestbook" className={linkClass}>GuestBook</NavLink>
           <NavLink to="/contact" className={linkClass}>Contact</NavLink>
           <button
             onClick={toggleTheme}
@@ -33,7 +34,6 @@ export default function Navbar() {
           >
             {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
           </button>
-          {/* Command palette shortcut hint */}
           <kbd
             onClick={triggerCommandPalette}
             className="hidden sm:inline-flex items-center px-2 py-1 ml-2 text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-700 transition"
