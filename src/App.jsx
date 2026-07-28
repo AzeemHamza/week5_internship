@@ -11,7 +11,6 @@ import FloatingCTA from './components/FloatingCTA';
 import CommandPalette from './components/CommandPalette';
 import EasterEggs from './components/EasterEggs';
 import CustomCursor from './components/CustomCursor';
-import AudioVisualizer from './components/AudioVisualizer';
 import { FiHome } from 'react-icons/fi';
 
 export default function App() {
@@ -47,7 +46,6 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <FloatingCTA />
-      <AudioVisualizer />
       <CommandPalette />
       <EasterEggs onTriggerSnake={() => window.dispatchEvent(new CustomEvent('openSnake'))} />
     </>
